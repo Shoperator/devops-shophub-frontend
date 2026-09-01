@@ -12,6 +12,20 @@ export const routerMock = {
   prefetch: jest.fn(),
 };
 
+/**
+ * What a dynamic segment resolves to. `useParams` reads this object rather than
+ * a fresh one, so a test can point the page at an id before rendering it.
+ */
+export const routeParamsMock: Record<string, string> = {};
+
+export function setRouteParams(params: Record<string, string>): void {
+  for (const key of Object.keys(routeParamsMock)) {
+    delete routeParamsMock[key];
+  }
+  Object.assign(routeParamsMock, params);
+}
+
 export const useRouter = () => routerMock;
 export const usePathname = () => "/";
 export const useSearchParams = () => new URLSearchParams();
+export const useParams = () => routeParamsMock;

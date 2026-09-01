@@ -21,9 +21,14 @@ export default function HomePage() {
         </p>
         <div className="hero-actions">
           {isAuthenticated ? (
-            <Link href="/account" className="btn btn-filled">
-              My account
-            </Link>
+            <>
+              <Link href="/shops" className="btn btn-filled">
+                My shops
+              </Link>
+              <Link href="/account" className="btn btn-outlined">
+                My account
+              </Link>
+            </>
           ) : (
             <>
               <Link href="/login" className="btn btn-filled">

@@ -37,9 +37,17 @@ Two things in the test setup are worth knowing about:
 | `/` | everyone | Landing page |
 | `/login`, `/register` | signed out | Sign in and self-registration |
 | `/account` | signed in | The profile behind the token |
+| `/shops` | signed in | The shops this account owns |
+| `/shops/new` | signed in | Create a shop and deploy it |
+| `/shops/[id]` | signed in | Reconfigure or delete one shop |
+
+A shop card links to the deployed site in a new tab, since a shop is its own
+application. `/shops/[id]` offers the settings a live shop can still be changed
+with — availability and wallet address — and shows the rest (name, address,
+database) as facts, because they are settled when the shop is created.
 
 ShopHub has a single kind of account, so there is nothing to authorize beyond
-being signed in. `/account` is wrapped in `<RequireAuth>`, which is a UX guard
+being signed in. Every signed-in page is wrapped in `<RequireAuth>`, a UX guard
 rather than a security boundary — the backend enforces the same rule on the
 token, and the page calls an endpoint that rejects anyone else.
 

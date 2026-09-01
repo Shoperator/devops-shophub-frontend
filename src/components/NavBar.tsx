@@ -7,6 +7,7 @@ import { useAuth } from "@/context/AuthContext";
 
 const SIGNED_IN_PAGES = [
   { href: "/", label: "Home" },
+  { href: "/shops", label: "My shops" },
   { href: "/account", label: "Account" },
 ];
 

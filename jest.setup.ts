@@ -1,11 +1,16 @@
 import "@testing-library/jest-dom";
-import { routerMock } from "@/test-utils/nextNavigation";
+import {
+  routeParamsMock,
+  routerMock,
+  setRouteParams,
+} from "@/test-utils/nextNavigation";
 
 // The `mock` prefix is what lets jest hoist this above the imports.
 const mockNextNavigation = {
   useRouter: () => routerMock,
   usePathname: () => "/",
   useSearchParams: () => new URLSearchParams(),
+  useParams: () => routeParamsMock,
 };
 
 jest.mock("next/navigation", () => mockNextNavigation);
@@ -22,5 +27,6 @@ beforeEach(() => {
 
 afterEach(() => {
   window.localStorage.clear();
+  setRouteParams({});
   jest.clearAllMocks();
 });
