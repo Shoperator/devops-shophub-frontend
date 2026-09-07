@@ -13,10 +13,6 @@ const SESSION = {
   },
 };
 
-/**
- * jsdom ships no Fetch API, so the pieces of a `Response` that `apiRequest`
- * actually touches are stood up by hand.
- */
 function jsonResponse(body: unknown, status = 200): Response {
   return {
     ok: status >= 200 && status < 300,
@@ -38,7 +34,10 @@ describe("authService", () => {
 
   describe("login", () => {
     it("posts the credentials to the backend the container was pointed at", async () => {
-      await authService.login({ username: "shop-owner", password: "sup3r-secret" });
+      await authService.login({
+        username: "shop-owner",
+        password: "sup3r-secret",
+      });
 
       const { url, init } = lastRequest();
       expect(url).toBe(`${BASE}/api/v1/auth/login`);
@@ -53,7 +52,10 @@ describe("authService", () => {
     });
 
     it("signs in without a token, since there is none yet", async () => {
-      await authService.login({ username: "shop-owner", password: "sup3r-secret" });
+      await authService.login({
+        username: "shop-owner",
+        password: "sup3r-secret",
+      });
 
       const headers = lastRequest().init.headers as Record<string, string>;
       expect(headers.Authorization).toBeUndefined();
@@ -76,7 +78,9 @@ describe("authService", () => {
     });
 
     it("reports a backend it cannot reach", async () => {
-      (globalThis.fetch as jest.Mock).mockRejectedValue(new TypeError("failed"));
+      (globalThis.fetch as jest.Mock).mockRejectedValue(
+        new TypeError("failed"),
+      );
 
       await expect(
         authService.login({ username: "shop-owner", password: "sup3r-secret" }),
@@ -87,7 +91,10 @@ describe("authService", () => {
   describe("register", () => {
     it("posts the registration and gets a session back", async () => {
       await expect(
-        authService.register({ username: "shop-owner", password: "sup3r-secret" }),
+        authService.register({
+          username: "shop-owner",
+          password: "sup3r-secret",
+        }),
       ).resolves.toEqual(SESSION);
 
       const { url, init } = lastRequest();

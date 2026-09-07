@@ -51,6 +51,15 @@ body {
   margin-bottom: 2rem;
 }
 
+/* Title on the left, the one action the page is for on the right. */
+.page-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
 .page-title {
   font-size: 2rem;
   font-weight: 600;
@@ -76,6 +85,22 @@ body {
   border-radius: 12px;
   box-shadow: var(--elevation-1);
   padding: 1.5rem;
+}
+
+.card-stacked {
+  margin-top: 1.5rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 /* ====== Buttons ====== */
@@ -116,12 +141,74 @@ body {
   background: var(--accent-soft);
 }
 
+.btn-danger {
+  background: var(--danger);
+  color: var(--on-accent);
+  box-shadow: var(--elevation-1);
+}
+
+.btn-danger:hover {
+  background: #a01c1c;
+  box-shadow: var(--elevation-2);
+}
+
 .btn:disabled {
   background: var(--border);
   border-color: transparent;
   color: var(--muted);
   box-shadow: none;
   cursor: not-allowed;
+}
+
+/* ====== Shops ====== */
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+.shop-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.shop-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.shop-slug {
+  margin-top: 0.15rem;
+  color: var(--muted);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
+.shop-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Pushed to the bottom so the buttons line up across cards of any height. */
+.shop-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+.danger-zone {
+  border-color: rgba(198, 40, 40, 0.35);
+}
+
+.danger-zone-text {
+  margin: 0 0 1.25rem;
+  text-align: left;
 }
 
 /* ====== Navbar ====== */
@@ -443,6 +530,27 @@ body {
   background: var(--danger-soft);
   color: var(--danger);
   font-size: 0.88rem;
+}
+
+.form-notice {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-size: 0.88rem;
+}
+
+/* A form that is part of a page rather than the whole of one. */
+.form-card-wide {
+  max-width: 640px;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.4rem;
 }
 
 .form-submit {
