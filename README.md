@@ -6,7 +6,6 @@ Frontend for the ShopHub platform.
 
 ```bash
 npm install
-echo "NEXT_PUBLIC_API_URL=http://localhost:3000" > .env.local
 npm run dev
 ```
 
@@ -60,7 +59,27 @@ expires.
 
 | Variable | Default | Description |
 | --- | --- | --- |
-| `NEXT_PUBLIC_API_URL` | `http://localhost:3000` | Base URL of the ShopHub backend |
+| `NEXT_PUBLIC_API_URL` | _same origin_ | Override, for a backend on another origin |
+
+### The backend address
+
+There isn't one. The Helm chart publishes both halves of ShopHub under a single
+host, and the Ingress routes `/api` to the backend and everything else here:
+
+```
+shophub.localhost/              -> this app
+shophub.localhost/api/v1/...    -> ShopHub backend
+```
+
+Requests are therefore addressed with path-only URLs, which the browser resolves
+against the host it is already on. Nothing tells this app where its backend is,
+the calls are same-origin so CORS never enters into it, and the same image works
+under any host.
+
+`next dev` stands in for the Ingress locally by forwarding `/api` to
+`http://localhost:3000` (`DEV_API_PROXY_TARGET` to point it elsewhere), so
+development takes the same path as the deployed app. The dev server runs on
+3001 because the backend owns 3000.
 
 Set it on the running container, not at build time.
 
