@@ -84,17 +84,17 @@ describe("NewShopPage", () => {
   it("shows what the backend refused and stays on the form", async () => {
     shopServiceMock.create.mockRejectedValue(
       new ApiError(
-        "walletAddress must be an alphanumeric wallet address of 26 to 128 characters",
+        "walletAddress must be a wallet address: 0x followed by 40 hexadecimal characters",
         400,
       ),
     );
     renderAs(SIGNED_IN_USER, <NewShopPage />);
 
-    const user = await fillIn({ wallet: "not-a-wallet-address-at-all" });
+    const user = await fillIn();
     await user.click(screen.getByRole("button", { name: "Create shop" }));
 
     expect(await screen.findByRole("alert")).toHaveTextContent(
-      "walletAddress must be an alphanumeric wallet address",
+      "walletAddress must be a wallet address",
     );
     expect(routerMock.push).not.toHaveBeenCalled();
   });
