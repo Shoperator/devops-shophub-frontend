@@ -139,12 +139,14 @@ function NewShopForm() {
               className="form-input font-mono text-sm"
               value={walletAddress}
               onChange={(event) => setWalletAddress(event.target.value)}
-              minLength={26}
-              maxLength={128}
+              placeholder="0x…"
+              pattern="0x[a-fA-F0-9]{40}"
+              maxLength={42}
               required
             />
             <span className="form-hint">
-              Where the payments your customers make are collected.
+              Where the payments your customers make are collected. An address
+              on the chain the shops settle on: 0x and 40 hex characters.
             </span>
           </div>
 

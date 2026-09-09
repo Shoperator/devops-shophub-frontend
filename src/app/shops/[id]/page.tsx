@@ -233,8 +233,9 @@ function ShopSettings({ shopId }: { shopId: string }) {
               onChange={(event) =>
                 update({ walletAddress: event.target.value })
               }
-              minLength={26}
-              maxLength={128}
+              placeholder="0x…"
+              pattern="0x[a-fA-F0-9]{40}"
+              maxLength={42}
               required
             />
           </div>
